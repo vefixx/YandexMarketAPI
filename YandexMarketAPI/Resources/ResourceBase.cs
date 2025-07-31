@@ -6,8 +6,9 @@ public abstract class ResourceBase
     
     protected readonly string BaseUrl = "https://api.partner.market.yandex.ru/";
 
-    protected ResourceBase(YandexMarketClient client)
+    protected ResourceBase(YandexMarketClient client, string basePath)
     {
+        BaseUrl += basePath;
         Client = client;
     }
 }

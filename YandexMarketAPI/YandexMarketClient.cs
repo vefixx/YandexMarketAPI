@@ -12,7 +12,6 @@ namespace YandexMarketAPI;
 public class YandexMarketClient
 {
     private HttpClient _httpClient;
-    private ILogger _logger = Log.CreateLogger<YandexMarketClient>();
     
     public Campaigns Campaigns;
     
