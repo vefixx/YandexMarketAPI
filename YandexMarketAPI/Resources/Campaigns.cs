@@ -4,7 +4,7 @@ namespace YandexMarketAPI.Resources;
 
 public class Campaigns : ResourceBase
 {
-    public Campaigns(YandexMarketClient client) : base(client, "campaigns")
+    public Campaigns(YandexMarketClient client, string basePath) : base(client, basePath)
     {
         
     }

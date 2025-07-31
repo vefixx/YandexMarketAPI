@@ -24,7 +24,7 @@ public class YandexMarketClient
         _httpClient = new HttpClient();
         _httpClient.DefaultRequestHeaders.Add("Api-Key", apiKey);
 
-        Campaigns = new Campaigns(this);
+        Campaigns = new Campaigns(this, "campaigns");
     }
 
     public async Task<T> GetAsync<T>(string url, Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
