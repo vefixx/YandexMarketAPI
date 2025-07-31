@@ -14,7 +14,7 @@ public class Business : ResourceBase
     /// </summary>
     /// <param name="businessId">Идентификатор кабинета. Чтобы его узнать, воспользуйтесь <see cref="Campaigns.GetCampaignsAsync"/></param>
     /// <returns><see cref="BusinessSettingsResponse"/></returns>
-    public async Task<BusinessSettingsResponse> GetBusinessSettings(long businessId)
+    public async Task<BusinessSettingsResponse> GetBusinessSettingsAsync(long businessId)
     {
         string url = BaseUrl + $"/{businessId}/settings";
         BusinessSettingsResponse response = await Client.PostAsync<BusinessSettingsResponse>(url);
