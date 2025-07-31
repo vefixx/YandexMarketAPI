@@ -41,16 +41,11 @@ public class Campaigns : ResourceBase
     /// </summary>
     /// <param name="campaignId">Идентификатор кампании. Его можно узнать с помощью <see cref="GetCampaignsAsync"/> или найти в кабинете продавца на Маркете.</param>
     /// <returns><see cref="CampaignResponse"/></returns>
-    public async Task<CampaignResponse> GetCampaignInfoAsync(int campaignId)
+    public async Task<CampaignResponse> GetCampaignInfoAsync(long campaignId)
     {
         string url = BaseUrl + $"/{campaignId}";
 
-        Dictionary<string, string?> queryParams = new Dictionary<string, string?>
-        {
-            ["campaignId"] = campaignId.ToString()
-        };
-
-        CampaignResponse response = await Client.GetAsync<CampaignResponse>(url, queryParams);
+        CampaignResponse response = await Client.GetAsync<CampaignResponse>(url);
         return response;
     }
 }

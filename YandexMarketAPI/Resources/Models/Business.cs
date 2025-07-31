@@ -12,7 +12,7 @@ public class Business
     /// Идентификатор кабинета.
     /// </summary>
     [JsonProperty("id")]
-    public int Id { get; set; }
+    public long Id { get; set; }
     
     /// <summary>
     /// Название бизнеса.

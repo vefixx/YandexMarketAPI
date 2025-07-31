@@ -19,7 +19,7 @@ public class Campaign
     /// Идентификатор плательщика в Яндекс Балансе.
     /// </summary>
     [JsonProperty("clientId")]
-    public int ClientId { get; set; }
+    public long ClientId { get; set; }
     
     /// <summary>
     /// URL магазина.
@@ -31,7 +31,7 @@ public class Campaign
     /// Идентификатор кампании.
     /// </summary>
     [JsonProperty("id")]
-    public int Id { get; set; }
+    public long Id { get; set; }
     
     /// <summary>
     /// Модель, по которой работает магазин:
