@@ -44,8 +44,20 @@ public class Campaigns : ResourceBase
     public async Task<CampaignResponse> GetCampaignInfoAsync(long campaignId)
     {
         string url = BaseUrl + $"/{campaignId}";
-
         CampaignResponse response = await Client.GetAsync<CampaignResponse>(url);
+        return response;
+    }
+    
+    /// <summary>
+    /// Возвращает информацию о настройках магазина, идентификатор которого указан в запросе.
+    /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaignSettings
+    /// </summary>
+    /// <param name="campaignId"></param>
+    /// <returns><see cref="CampaignSettingsResponse"/></returns>
+    public async Task<CampaignSettingsResponse> GetCampaignSettingsAsync(long campaignId)
+    {
+        string url = BaseUrl + $"/{campaignId}/settings";
+        CampaignSettingsResponse response = await Client.GetAsync<CampaignSettingsResponse>(url);
         return response;
     }
 }

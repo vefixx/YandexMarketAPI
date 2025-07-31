@@ -27,7 +27,7 @@ public class YandexMarketClient
         Campaigns = new Campaigns(this);
     }
 
-    public async Task<T> GetAsync<T>(string url, Dictionary<string, string?>? queryParams = null)
+    public async Task<T> GetAsync<T>(string url, Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
     {
         string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
         
@@ -39,7 +39,11 @@ public class YandexMarketClient
             throw new HttpRequestException($"Ошибка в GET запросе {uri}: {response.StatusCode}, ответ: {content}");
         }
 
-        var result = JsonConvert.DeserializeObject<T>(content);
+        var settings = new JsonSerializerSettings
+        {
+            DateFormatString = dateFormatString
+        };
+        var result = JsonConvert.DeserializeObject<T>(content, settings);
 
         if (result is null)
         {
@@ -50,7 +54,7 @@ public class YandexMarketClient
     }
 
     public async Task<T> PostAsync<T>(string url, object? jsonData = null,
-        Dictionary<string, string?>? queryParams = null)
+        Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
     {
         string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
         
@@ -62,7 +66,11 @@ public class YandexMarketClient
             throw new HttpRequestException($"Ошибка в POST запросе {uri}: {response.StatusCode}, ответ: {content}");
         }
 
-        var result = JsonConvert.DeserializeObject<T>(content);
+        var settings = new JsonSerializerSettings
+        {
+            DateFormatString = dateFormatString
+        };
+        var result = JsonConvert.DeserializeObject<T>(content, settings);
 
         if (result is null)
         {
@@ -74,7 +82,7 @@ public class YandexMarketClient
 
 
     public async Task<T> PutAsync<T>(string url, object? jsonData = null,
-        Dictionary<string, string?>? queryParams = null)
+        Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
     {
         string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
         
@@ -86,7 +94,11 @@ public class YandexMarketClient
             throw new HttpRequestException($"Ошибка в PUT запросе {uri}: {response.StatusCode}, ответ: {content}");
         }
 
-        var result = JsonConvert.DeserializeObject<T>(content);
+        var settings = new JsonSerializerSettings
+        {
+            DateFormatString = dateFormatString
+        };
+        var result = JsonConvert.DeserializeObject<T>(content, settings);
 
         if (result is null)
         {
