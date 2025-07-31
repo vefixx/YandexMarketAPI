@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Json;
 using YandexMarketAPI.Resources;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace YandexMarketAPI;
@@ -14,6 +13,7 @@ public class YandexMarketClient
     private HttpClient _httpClient;
     
     public Campaigns Campaigns;
+    public Business Business;
     
     /// <summary>
     /// Инициализация клиента и ресурсов
@@ -25,6 +25,7 @@ public class YandexMarketClient
         _httpClient.DefaultRequestHeaders.Add("Api-Key", apiKey);
 
         Campaigns = new Campaigns(this, "campaigns");
+        Business = new Business(this, "businesses");
     }
 
     public async Task<T> GetAsync<T>(string url, Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
