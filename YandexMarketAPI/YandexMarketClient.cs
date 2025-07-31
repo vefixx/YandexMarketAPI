@@ -14,6 +14,7 @@ public class YandexMarketClient
     
     public Campaigns Campaigns;
     public Business Business;
+    public Categories Categories;
     
     /// <summary>
     /// Инициализация клиента и ресурсов
@@ -26,6 +27,7 @@ public class YandexMarketClient
 
         Campaigns = new Campaigns(this, "campaigns");
         Business = new Business(this, "businesses");
+        Categories = new Categories(this, "categories");
     }
 
     public async Task<T> GetAsync<T>(string url, Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
