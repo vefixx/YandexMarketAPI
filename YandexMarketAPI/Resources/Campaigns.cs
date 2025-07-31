@@ -6,9 +6,8 @@ public class Campaigns : ResourceBase
 {
     public Campaigns(YandexMarketClient client, string basePath) : base(client, basePath)
     {
-        
     }
-    
+
     /// <summary>
     /// Список магазинов пользователя
     /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaigns
@@ -30,11 +29,11 @@ public class Campaigns : ResourceBase
                 ["pageSize"] = pageSize.ToString()
             };
         }
-        
+
         CampaignsResponse response = await Client.GetAsync<CampaignsResponse>(url, queryParams);
         return response;
     }
-    
+
     /// <summary>
     /// Информация о магазине
     /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaign
@@ -47,7 +46,7 @@ public class Campaigns : ResourceBase
         CampaignResponse response = await Client.GetAsync<CampaignResponse>(url);
         return response;
     }
-    
+
     /// <summary>
     /// Возвращает информацию о настройках магазина, идентификатор которого указан в запросе.
     /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaignSettings
@@ -58,6 +57,34 @@ public class Campaigns : ResourceBase
     {
         string url = BaseUrl + $"/{campaignId}/settings";
         CampaignSettingsResponse response = await Client.GetAsync<CampaignSettingsResponse>(url);
+        return response;
+    }
+
+    /// <summary>
+    /// Возвращает данные об остатках товаров (для всех моделей) и об оборачиваемости товаров (для модели FBY).
+    /// По умолчанию данные по оборачиваемости не возвращаются
+    /// Чтобы они были в ответе, передавайте true в поле withTurnover в <see cref="GetStocksRequest"/>.
+    /// </summary>
+    /// <param name="campaignId">Идентификатор кампании. Его можно узнать с помощью запроса <see cref="GetCampaignsAsync"/> или найти в кабинете продавца на Маркете.</param>
+    /// <param name="limit">Количество значений на одной странице.</param>
+    /// <param name="pageToken">Идентификатор страницы с результатами. Если параметр не указан, возвращается первая страница. Рекомендуется передавать значение выходного параметра nextPageToken, полученное при последнем запросе.</param>
+    /// <param name="requestBody"></param>
+    /// <returns></returns>
+    public async Task<GetStocksResponse> GetStocksAsync(long campaignId, int limit = 100, string? pageToken = null,
+        GetStocksRequest? requestBody = null)
+    {
+        string url = BaseUrl + $"/{campaignId}/offers/stocks";
+
+        Dictionary<string, string?> queryParams = new Dictionary<string, string?>
+        {
+            ["limit"] = limit.ToString()
+        };
+
+        if (pageToken is not null)
+            queryParams.Add("page_token", pageToken);
+
+        GetStocksResponse response =
+            await Client.PostAsync<GetStocksResponse>(url, jsonData: requestBody, queryParams: queryParams);
         return response;
     }
 }
