@@ -12,7 +12,7 @@ public class CampaignsResponse
     /// Список с информацией по каждому магазину. Информация о магазине.
     /// </summary>
     [JsonProperty("campaigns")]
-    public Campaign[] Campaigns { get; set; }
+    public List<Campaign> Campaigns { get; set; }
     
     /// <summary>
     /// Модель для пагинации.

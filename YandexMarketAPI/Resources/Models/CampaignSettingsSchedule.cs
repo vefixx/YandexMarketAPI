@@ -13,19 +13,19 @@ public class CampaignSettingsSchedule
     /// Список дней, в которые служба доставки не работает. Дни магазин указал в кабинете продавца на Маркете. Формат даты: ДД-ММ-ГГГГ.
     /// </summary>
     [JsonProperty("customHolidays")]
-    public DateTime[] CustomHolidays { get; set; }
+    public List<DateTime> CustomHolidays { get; set; }
     
     /// <summary>
     /// Список выходных и праздничных дней, в которые служба доставки работает. Дни магазин указал в кабинете продавца на Маркете. Формат даты: ДД-ММ-ГГГГ.
     /// </summary>
     [JsonProperty("customWorkingDays")]
-    public DateTime[] CustomWorkingDays { get; set; }
+    public List<DateTime> CustomWorkingDays { get; set; }
     
     /// <summary>
     /// Итоговый список нерабочих дней службы доставки. Список рассчитывается с учетом выходных, нерабочих дней и государственных праздников. Информацию по ним магазин указывает в кабинете продавца на Маркете. Формат даты: ДД-ММ-ГГГГ.
     /// </summary>
     [JsonProperty("totalHolidays")]
-    public DateTime[] TotalHolidays { get; set; }
+    public List<DateTime> TotalHolidays { get; set; }
     
     /// <summary>
     /// Список выходных дней недели и государственных праздников.
@@ -40,7 +40,7 @@ public class CampaignSettingsSchedule
     /// 7 — воскресенье.
     /// </summary>
     [JsonProperty("weeklyHolidays")]
-    public short[] WeeklyHolidays { get; set; }
+    public List<short> WeeklyHolidays { get; set; }
     
     /// <summary>
     /// Признак работы службы доставки в государственные праздники. Возможные значения.
