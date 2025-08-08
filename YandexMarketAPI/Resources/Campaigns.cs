@@ -1,4 +1,5 @@
-﻿using YandexMarketAPI.Resources.Models;
+﻿using YandexMarketAPI.Resources.Enums;
+using YandexMarketAPI.Resources.Models;
 
 namespace YandexMarketAPI.Resources;
 
@@ -85,6 +86,13 @@ public class Campaigns : ResourceBase
 
         GetStocksResponse response =
             await Client.PostAsync<GetStocksResponse>(url, jsonData: requestBody, queryParams: queryParams);
+        return response;
+    }
+
+    public async Task<PutStocksResponse> PutStocksAsync(long campaignId, PutStocksRequest requestBody)
+    {
+        string url = BaseUrl + $"/{campaignId}/offers/stocks";
+        PutStocksResponse response = await Client.PutAsync<PutStocksResponse>(url, jsonData: requestBody);
         return response;
     }
 }

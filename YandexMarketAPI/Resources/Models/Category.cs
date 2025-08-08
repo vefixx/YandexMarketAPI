@@ -22,5 +22,5 @@ public class Category
     public string Name { get; set; }
     
     [JsonProperty("children")]
-    public Category[]? Children { get; set; }
+    public List<Category>? Children { get; set; }
 }

@@ -20,7 +20,7 @@ public class WarehouseOffer
     /// Информация об остатках товара.
     /// </summary>
     [JsonProperty("stocks")]
-    public WarehouseStock[] Stocks { get; set; }
+    public List<WarehouseStock> Stocks { get; set; }
     
     /// <summary>
     /// Информация об оборачиваемости.

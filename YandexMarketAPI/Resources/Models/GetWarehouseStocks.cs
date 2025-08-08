@@ -14,7 +14,7 @@ public class GetWarehouseStocks
     /// Информация об остатках товаров на складе.
     /// </summary>
     [JsonProperty("warehouses")]
-    public WarehouseOffers[] Warehouses { get; set; }
+    public List<WarehouseOffers> Warehouses { get; set; }
     
     /// <summary>
     /// Информация о страницах результатов.

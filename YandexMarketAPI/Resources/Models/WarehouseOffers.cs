@@ -14,7 +14,7 @@ public class WarehouseOffers
     /// Информация об остатках товара.
     /// </summary>
     [JsonProperty("offers")]
-    public WarehouseOffer[] Offers { get; set; }
+    public List<WarehouseOffer> Offers { get; set; }
     
     [JsonProperty("warehouseId")]
     public long WarehouseId { get; set; }

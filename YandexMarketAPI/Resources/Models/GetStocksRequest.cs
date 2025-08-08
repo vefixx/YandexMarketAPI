@@ -22,7 +22,7 @@ public class GetStocksRequest
     /// Возвращается информация об остатках всех переданных SKU, включая товары в архиве.
     /// </summary>
     [JsonProperty("offerIds")]
-    public string[]? OfferIds { get; set; }
+    public List<string>? OfferIds { get; set; }
     
     /// <summary>
     /// Идентификатор склада.
