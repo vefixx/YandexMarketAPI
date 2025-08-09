@@ -66,10 +66,10 @@ CampaignsResponse campaignsResponse = await client.Campaigns.GetCampaignsAsync()
 ```
 > **Важно!** На выходе вы **не получаете** сразу список магазинов. Сначала возвращается **ответ** от сервера (модель `CampaignsResponse`).
 
-Теперь можно получить массив магазинов `Campaign[]`:
+Теперь можно получить список магазинов `List<Campaign>`:
 
 ```csharp
-Campaign[] campaigns = campaignsResponse.Campaigns;
+List<Campaign> campaigns = campaignsResponse.Campaigns;
 ```
 
 **Полный пример:**
@@ -85,7 +85,7 @@ class Program
     {
         YandexMarketClient client = new YandexMarketClient(apiKey: "ВАШ_API_КЛЮЧ");
         CampaignsResponse campaignsResponse = await client.Campaigns.GetCampaignsAsync();
-        Campaign[] campaigns = campaignsResponse.Campaigns;
+        List<Campaign> campaigns = campaignsResponse.Campaigns;
         
         Console.WriteLine($"Получено всего магазинов: {campaigns.Length}");
 
