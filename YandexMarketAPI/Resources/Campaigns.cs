@@ -95,4 +95,9 @@ public class Campaigns : ResourceBase
         PutStocksResponse response = await Client.PutAsync<PutStocksResponse>(url, jsonData: requestBody);
         return response;
     }
+
+    public async Task<ApiDefaultResponse> UpdatePrices(long campaignId)
+    {
+        return new ApiDefaultResponse();
+    }
 }
