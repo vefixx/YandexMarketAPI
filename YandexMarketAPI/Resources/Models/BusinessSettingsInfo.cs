@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Информация о кабинете и его настройках.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/businesses/getBusinessSettings#getbusinesssettingsinfodto
 /// </summary>
-public class GetBusinessSettingsInfo
+public class BusinessSettingsInfo
 {
     /// <summary>
     /// Базовая информация о кабинете.

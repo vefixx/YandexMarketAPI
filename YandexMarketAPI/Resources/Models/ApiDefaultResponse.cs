@@ -3,6 +3,10 @@ using YandexMarketAPI.Resources.Enums;
 
 namespace YandexMarketAPI.Resources.Models;
 
+
+/// <summary>
+/// https://yandex.ru/dev/market/partner-api/doc/ru/reference/assortment/updatePrices#apiresponsestatustype
+/// </summary>
 public class ApiDefaultResponse
 {
     [JsonProperty("status")]

@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Дополнительный контент (Body) для отправки запроса <see cref="Campaigns.GetStocksAsync"/>
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/getStocks#body
 /// </summary>
-public class GetStocksRequest
+public class StocksGetRequest
 {
     /// <summary>
     /// Фильтр по нахождению в архиве.

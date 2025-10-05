@@ -13,7 +13,7 @@ public class BusinessSettingsResponse
     /// Информация о кабинете и его настройках.
     /// </summary>
     [JsonProperty("result")]
-    public GetBusinessSettingsInfo Result { get; set; }
+    public BusinessSettingsInfo Result { get; set; }
     
     /// <summary>
     /// Тип ответа

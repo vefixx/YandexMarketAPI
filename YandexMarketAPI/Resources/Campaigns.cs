@@ -64,15 +64,15 @@ public class Campaigns : ResourceBase
     /// <summary>
     /// Возвращает данные об остатках товаров (для всех моделей) и об оборачиваемости товаров (для модели FBY).
     /// По умолчанию данные по оборачиваемости не возвращаются
-    /// Чтобы они были в ответе, передавайте true в поле withTurnover в <see cref="GetStocksRequest"/>.
+    /// Чтобы они были в ответе, передавайте true в поле withTurnover в <see cref="StocksGetRequest"/>.
     /// </summary>
     /// <param name="campaignId">Идентификатор кампании. Его можно узнать с помощью запроса <see cref="GetCampaignsAsync"/> или найти в кабинете продавца на Маркете.</param>
     /// <param name="limit">Количество значений на одной странице.</param>
     /// <param name="pageToken">Идентификатор страницы с результатами. Если параметр не указан, возвращается первая страница. Рекомендуется передавать значение выходного параметра nextPageToken, полученное при последнем запросе.</param>
     /// <param name="requestBody"></param>
     /// <returns></returns>
-    public async Task<GetStocksResponse> GetStocksAsync(long campaignId, int limit = 100, string? pageToken = null,
-        GetStocksRequest? requestBody = null)
+    public async Task<StocksGetResponse> GetStocksAsync(long campaignId, int limit = 100, string? pageToken = null,
+        StocksGetRequest? requestBody = null)
     {
         string url = BaseUrl + $"/{campaignId}/offers/stocks";
 
@@ -84,8 +84,8 @@ public class Campaigns : ResourceBase
         if (pageToken is not null)
             queryParams.Add("page_token", pageToken);
 
-        GetStocksResponse response =
-            await Client.PostAsync<GetStocksResponse>(url, jsonData: requestBody, queryParams: queryParams);
+        StocksGetResponse response =
+            await Client.PostAsync<StocksGetResponse>(url, jsonData: requestBody, queryParams: queryParams);
         return response;
     }
 

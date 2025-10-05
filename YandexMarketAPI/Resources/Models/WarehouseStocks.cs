@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Список складов с информацией об остатках на каждом из них.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/getStocks#getwarehousestocksdto
 /// </summary>
-public class GetWarehouseStocks
+public class WarehouseStocks
 {
     /// <summary>
     /// Страница списка складов.
