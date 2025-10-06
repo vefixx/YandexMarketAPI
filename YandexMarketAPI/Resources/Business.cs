@@ -21,6 +21,13 @@ public class Business : ResourceBase
         return response;
     }
     
+    /// <summary>
+    /// Устанавливает цены, которые действуют во всех магазинах.
+    /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/business-assortment/updateBusinessPrices#request
+    /// </summary>
+    /// <param name="businessId">Идентификатор кабинета.</param>
+    /// <param name="offers">Список товаров с ценами. Товар с новой ценой.</param>
+    /// <returns></returns>
     public async Task<ApiDefaultResponse> OfferPricesUpdateAsync(long businessId, List<UpdateBusinessOfferPriceDTO> offers)
     {
         string url = BaseUrl + $"/{businessId}/offer-prices/updates";

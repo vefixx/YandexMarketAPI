@@ -3,6 +3,7 @@ using System.Text;
 using YandexMarketAPI.Resources;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 namespace YandexMarketAPI;
@@ -29,7 +30,8 @@ public class YandexMarketClient
                 processDictionaryKeys: true,
                 overrideSpecifiedNames: false
             )
-        }
+        },
+        Converters = { new StringEnumConverter() }
     };
 
     private static readonly JsonSerializerSettings ResponseJsonSettings = new()
@@ -74,10 +76,11 @@ public class YandexMarketClient
         Dictionary<string, string?>? queryParams = null)
     {
         string uri = BuildUri(url, queryParams);
+        StringContent? requestContent = BuildContent(jsonData);
 
         using var request = new HttpRequestMessage(method, uri)
         {
-            Content = BuildContent(jsonData)
+            Content = requestContent
         };
 
         using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseContentRead);
@@ -85,9 +88,10 @@ public class YandexMarketClient
 
         if (!response.IsSuccessStatusCode)
         {
-            string preview = content.Length > 500 ? content[..500] : content;
+            string previewResponse = content.Length > 500 ? content[..500] : content;
+            
             throw new HttpRequestException(
-                $"Ошибка {method} {uri}: {(int)response.StatusCode} {response.ReasonPhrase}. Ответ: {preview}");
+                $"Ошибка {method} {uri}: {(int)response.StatusCode} {response.ReasonPhrase}. Ответ: {previewResponse}");
         }
 
         var result = JsonConvert.DeserializeObject<T>(content, ResponseJsonSettings);
