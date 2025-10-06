@@ -8,7 +8,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Информация об остатках товара.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/getStocks#warehousestockdto
 /// </summary>
-public class WarehouseStock
+public class WarehouseStockDTO
 {
     /// <summary>
     /// Значение остатков.

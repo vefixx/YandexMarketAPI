@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Период, за который рассчитывается итоговый список нерабочих дней службы доставки.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaignSettings#campaignsettingstimeperioddto
 /// </summary>
-public class CampaignSettingsTimePeriod
+public class CampaignSettingsTimePeriodDTO
 {
     [JsonProperty("fromDate")]
     public DateTime FromDate { get; set; }

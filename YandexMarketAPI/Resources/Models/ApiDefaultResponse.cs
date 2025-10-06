@@ -12,5 +12,5 @@ public class ApiDefaultResponse
     [JsonProperty("status")]
     public ApiResponseStatusType Status { get; set; }
 
-    [JsonProperty("errors")] public List<ApiError>? Errors { get; set; } = null;
+    [JsonProperty("errors")] public List<ApiErrorDTO>? Errors { get; set; } = null;
 }

@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Информация об остатках товара.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/updateStocks#updatestockitemdto
 /// </summary>
-public class UpdateStockItem
+public class UpdateStockItemDTO
 {
     /// <summary>
     /// Количество доступного товара.

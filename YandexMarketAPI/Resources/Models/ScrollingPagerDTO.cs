@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Информация о страницах результатов.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/getStocks#scrollingpagerdto
 /// </summary>
-public class ScrollingPager
+public class ScrollingPagerDTO
 {
     /// <summary>
     /// Идентификатор следующей страницы результатов.

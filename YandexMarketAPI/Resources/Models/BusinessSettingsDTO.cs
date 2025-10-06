@@ -8,7 +8,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Настройки кабинета.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/businesses/getBusinessSettings#businesssettingsdto
 /// </summary>
-public class BusinessSettings
+public class BusinessSettingsDTO
 {
     /// <summary>
     /// Валюта в кабинете продавца на Маркете.

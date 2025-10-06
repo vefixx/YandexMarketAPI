@@ -7,17 +7,17 @@ namespace YandexMarketAPI.Resources.Models;
 /// Информация о кабинете и его настройках.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/businesses/getBusinessSettings#getbusinesssettingsinfodto
 /// </summary>
-public class BusinessSettingsInfo
+public class BusinessSettingsInfoDTO
 {
     /// <summary>
     /// Базовая информация о кабинете.
     /// </summary>
     [JsonProperty("info")]
-    public Business Info { get; set; }
+    public BusinessDTO Info { get; set; }
     
     /// <summary>
     /// Настройки на уровне кабинета.
     /// </summary>
     [JsonProperty("settings")]
-    public BusinessSettings Settings { get; set; }
+    public BusinessSettingsDTO SettingsDto { get; set; }
 }

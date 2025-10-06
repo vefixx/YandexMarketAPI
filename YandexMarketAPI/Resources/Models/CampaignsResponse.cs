@@ -12,11 +12,11 @@ public class CampaignsResponse
     /// Список с информацией по каждому магазину. Информация о магазине.
     /// </summary>
     [JsonProperty("campaigns")]
-    public List<Campaign> Campaigns { get; set; }
+    public List<CampaignDTO> Campaigns { get; set; }
     
     /// <summary>
     /// Модель для пагинации.
     /// </summary>
     [JsonProperty("pager")]
-    public FlippingPager Pager { get; set; }
+    public FlippingPagerDTO PagerDto { get; set; }
 }

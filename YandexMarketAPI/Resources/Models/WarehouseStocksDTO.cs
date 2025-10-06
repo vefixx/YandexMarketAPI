@@ -7,19 +7,19 @@ namespace YandexMarketAPI.Resources.Models;
 /// Список складов с информацией об остатках на каждом из них.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/getStocks#getwarehousestocksdto
 /// </summary>
-public class WarehouseStocks
+public class WarehouseStocksDTO
 {
     /// <summary>
     /// Страница списка складов.
     /// Информация об остатках товаров на складе.
     /// </summary>
     [JsonProperty("warehouses")]
-    public List<WarehouseOffers> Warehouses { get; set; }
+    public List<WarehouseOffersDTO> Warehouses { get; set; }
     
     /// <summary>
     /// Информация о страницах результатов.
     /// Идентификатор следующей страницы.
     /// </summary>
     [JsonProperty("paging")]
-    public ScrollingPager Paging { get; set; }
+    public ScrollingPagerDTO Paging { get; set; }
 }

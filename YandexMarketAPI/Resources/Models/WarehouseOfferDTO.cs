@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Информация об остатках товара.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/getStocks#warehouseofferdto
 /// </summary>
-public class WarehouseOffer
+public class WarehouseOfferDTO
 {
     /// <summary>
     /// Ваш SKU — идентификатор товара в вашей системе.
@@ -20,13 +20,13 @@ public class WarehouseOffer
     /// Информация об остатках товара.
     /// </summary>
     [JsonProperty("stocks")]
-    public List<WarehouseStock> Stocks { get; set; }
+    public List<WarehouseStockDTO> Stocks { get; set; }
     
     /// <summary>
     /// Информация об оборачиваемости.
     /// </summary>
     [JsonProperty("turnoverSummary")]
-    public Turnover? TurnoverSummary { get; set; }
+    public TurnoverDTO? TurnoverSummary { get; set; }
     
     /// <summary>
     /// Дата и время последнего обновления информации об остатках.

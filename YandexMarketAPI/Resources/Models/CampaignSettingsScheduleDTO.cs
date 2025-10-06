@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Расписание работы службы доставки в своем регионе.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaignSettings#campaignsettingsscheduledto
 /// </summary>
-public class CampaignSettingsSchedule
+public class CampaignSettingsScheduleDTO
 {
     /// <summary>
     /// Список дней, в которые служба доставки не работает. Дни магазин указал в кабинете продавца на Маркете. Формат даты: ДД-ММ-ГГГГ.
@@ -52,5 +52,5 @@ public class CampaignSettingsSchedule
     /// Период, за который рассчитывается итоговый список нерабочих дней службы доставки.
     /// </summary>
     [JsonProperty("period")]
-    public CampaignSettingsTimePeriod Period { get; set; }
+    public CampaignSettingsTimePeriodDTO PeriodDto { get; set; }
 }

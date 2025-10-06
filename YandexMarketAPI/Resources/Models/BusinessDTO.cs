@@ -6,7 +6,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// <summary>
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaigns#businessdto
 /// </summary>
-public class Business
+public class BusinessDTO
 {
     /// <summary>
     /// Идентификатор кабинета.

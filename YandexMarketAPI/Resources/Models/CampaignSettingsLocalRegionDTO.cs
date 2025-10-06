@@ -8,13 +8,13 @@ namespace YandexMarketAPI.Resources.Models;
 /// Информация о своем регионе магазина.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaignSettings#campaignsettingslocalregiondto 
 /// </summary>
-public class CampaignSettingsLocalRegion
+public class CampaignSettingsLocalRegionDTO
 {
     /// <summary>
     /// Информация о доставке в своем регионе магазина.
     /// </summary>
     [JsonProperty("delivery")]
-    public CampaignSettingsDelivery Delivery { get; set; }
+    public CampaignSettingsDeliveryDTO DeliveryDto { get; set; }
     
     /// <summary>
     /// Источник информации о расписании работы службы доставки. Возможные значения:

@@ -12,5 +12,5 @@ public class CampaignResponse
     /// Информация о магаизне.
     /// </summary>
     [JsonProperty("campaign")]
-    public Campaign Campaign { get; set; }
+    public CampaignDTO CampaignDto { get; set; }
 }

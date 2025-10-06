@@ -8,7 +8,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Информация об оборачиваемости товара.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/getStocks#turnoverdto
 /// </summary>
-public class Turnover
+public class TurnoverDTO
 {
     /// <summary>
     /// Оценка оборачиваемости.

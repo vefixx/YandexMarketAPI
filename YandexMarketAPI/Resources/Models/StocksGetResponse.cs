@@ -12,7 +12,7 @@ public class StocksGetResponse
     /// Список складов с информацией об остатках на каждом из них.
     /// </summary>
     [JsonProperty("result")] 
-    public WarehouseStocks Result { get; set; }
+    public WarehouseStocksDTO Result { get; set; }
     
     [JsonProperty("status")]
     public ApiResponseStatusType Status { get; set; }

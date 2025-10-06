@@ -6,7 +6,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// <summary>
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaigns#flippingpagerdto
 /// </summary>
-public class FlippingPager
+public class FlippingPagerDTO
 {
     /// <summary>
     /// Текущая страница.

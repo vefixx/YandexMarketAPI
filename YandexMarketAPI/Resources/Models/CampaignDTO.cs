@@ -7,13 +7,13 @@ namespace YandexMarketAPI.Resources.Models;
 /// <summary>
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaigns#campaigndto
 /// </summary>
-public class Campaign
+public class CampaignDTO
 {
     /// <summary>
     /// Информация о кабинете.
     /// </summary>
     [JsonProperty("business")]
-    public Business Business { get; set; }
+    public BusinessDTO BusinessDto { get; set; }
     
     /// <summary>
     /// Идентификатор плательщика в Яндекс Балансе.

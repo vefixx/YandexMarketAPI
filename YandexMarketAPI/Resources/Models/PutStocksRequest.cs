@@ -9,5 +9,5 @@ public class PutStocksRequest
     /// Информация об остатках одного товара на одном из складов.
     /// </summary>
     [JsonProperty("skus")]
-    public List<UpdateStock> Skus { get; set; }
+    public List<UpdateStockDTO> Skus { get; set; }
 }

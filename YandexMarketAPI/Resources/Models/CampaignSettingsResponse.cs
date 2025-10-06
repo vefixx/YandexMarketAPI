@@ -12,5 +12,5 @@ public class CampaignSettingsResponse
     /// Настройки магазина.
     /// </summary>
     [JsonProperty("settings")]
-    public CampaignSettings Settings { get; set; }
+    public CampaignSettingsDTO SettingsDto { get; set; }
 }

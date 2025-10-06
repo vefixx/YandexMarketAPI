@@ -7,7 +7,7 @@ namespace YandexMarketAPI.Resources.Models;
 /// Настройки магазина.
 /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/campaigns/getCampaignSettings#campaignsettingsdto
 /// </summary>
-public class CampaignSettings
+public class CampaignSettingsDTO
 {
     /// <summary>
     /// Идентификатор региона, в котором находится магазин.
@@ -19,7 +19,7 @@ public class CampaignSettings
     /// Информация о своем регионе магазина.
     /// </summary>
     [JsonProperty("localRegion")]
-    public CampaignSettingsLocalRegion LocalRegion { get; set; }
+    public CampaignSettingsLocalRegionDTO LocalRegionDto { get; set; }
     
     /// <summary>
     /// Наименование магазина на Яндекс Маркете. Если наименование отсутствует, значение параметра выводится — null.
