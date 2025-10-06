@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexMarketAPI", "YandexMarketAPI\YandexMarketAPI.csproj", "{251E0FA6-3597-439C-8805-72B50AB35C2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{8CB71802-B52F-41E6-84DB-35A511B6C268}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{251E0FA6-3597-439C-8805-72B50AB35C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{251E0FA6-3597-439C-8805-72B50AB35C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{251E0FA6-3597-439C-8805-72B50AB35C2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CB71802-B52F-41E6-84DB-35A511B6C268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB71802-B52F-41E6-84DB-35A511B6C268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB71802-B52F-41E6-84DB-35A511B6C268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB71802-B52F-41E6-84DB-35A511B6C268}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

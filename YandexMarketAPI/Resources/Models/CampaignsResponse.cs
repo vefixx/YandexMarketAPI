@@ -18,5 +18,5 @@ public class CampaignsResponse
     /// Модель для пагинации.
     /// </summary>
     [JsonProperty("pager")]
-    public FlippingPagerDTO PagerDto { get; set; }
+    public FlippingPagerDTO Pager { get; set; }
 }

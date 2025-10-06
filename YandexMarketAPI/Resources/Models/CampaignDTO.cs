@@ -13,7 +13,7 @@ public class CampaignDTO
     /// Информация о кабинете.
     /// </summary>
     [JsonProperty("business")]
-    public BusinessDTO BusinessDto { get; set; }
+    public BusinessDTO Business { get; set; }
     
     /// <summary>
     /// Идентификатор плательщика в Яндекс Балансе.

@@ -14,7 +14,7 @@ public class CampaignSettingsLocalRegionDTO
     /// Информация о доставке в своем регионе магазина.
     /// </summary>
     [JsonProperty("delivery")]
-    public CampaignSettingsDeliveryDTO DeliveryDto { get; set; }
+    public CampaignSettingsDeliveryDTO Delivery { get; set; }
     
     /// <summary>
     /// Источник информации о расписании работы службы доставки. Возможные значения:

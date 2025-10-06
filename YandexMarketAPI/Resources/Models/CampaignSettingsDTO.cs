@@ -19,7 +19,7 @@ public class CampaignSettingsDTO
     /// Информация о своем регионе магазина.
     /// </summary>
     [JsonProperty("localRegion")]
-    public CampaignSettingsLocalRegionDTO LocalRegionDto { get; set; }
+    public CampaignSettingsLocalRegionDTO LocalRegion { get; set; }
     
     /// <summary>
     /// Наименование магазина на Яндекс Маркете. Если наименование отсутствует, значение параметра выводится — null.

@@ -13,5 +13,5 @@ public class CampaignSettingsDeliveryDTO
     /// Расписание работы службы доставки в своем регионе.
     /// </summary>
     [JsonProperty("schedule")]
-    public CampaignSettingsScheduleDTO ScheduleDto { get; set; }
+    public CampaignSettingsScheduleDTO Schedule { get; set; }
 }

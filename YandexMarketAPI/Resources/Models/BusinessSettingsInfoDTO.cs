@@ -19,5 +19,5 @@ public class BusinessSettingsInfoDTO
     /// Настройки на уровне кабинета.
     /// </summary>
     [JsonProperty("settings")]
-    public BusinessSettingsDTO SettingsDto { get; set; }
+    public BusinessSettingsDTO Settings { get; set; }
 }

@@ -52,5 +52,5 @@ public class CampaignSettingsScheduleDTO
     /// Период, за который рассчитывается итоговый список нерабочих дней службы доставки.
     /// </summary>
     [JsonProperty("period")]
-    public CampaignSettingsTimePeriodDTO PeriodDto { get; set; }
+    public CampaignSettingsTimePeriodDTO Period { get; set; }
 }
