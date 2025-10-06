@@ -88,16 +88,22 @@ public class Campaigns : ResourceBase
             await Client.PostAsync<StocksGetResponse>(url, jsonData: requestBody, queryParams: queryParams);
         return response;
     }
-
-    public async Task<PutStocksResponse> PutStocksAsync(long campaignId, PutStocksRequest requestBody)
+    
+    /// <summary>
+    /// Передача остатков
+    /// https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/updateStocks#request
+    /// </summary>
+    /// <param name="campaignId">ID кампании</param>
+    /// <param name="skus">Данные об остатках товаров</param>
+    /// <returns></returns>
+    public async Task<PutStocksResponse> PutStocksAsync(long campaignId, List<UpdateStockDTO> skus)
     {
         string url = BaseUrl + $"/{campaignId}/offers/stocks";
-        PutStocksResponse response = await Client.PutAsync<PutStocksResponse>(url, jsonData: requestBody);
+        Dictionary<string, object?> json = new Dictionary<string, object?>
+        {
+            ["skus"] = skus
+        };
+        PutStocksResponse response = await Client.PutAsync<PutStocksResponse>(url, jsonData: json);
         return response;
-    }
-
-    public async Task<ApiDefaultResponse> UpdatePrices(long campaignId)
-    {
-        return new ApiDefaultResponse();
     }
 }

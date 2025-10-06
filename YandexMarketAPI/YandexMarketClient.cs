@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text;
 using YandexMarketAPI.Resources;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
@@ -11,11 +12,11 @@ namespace YandexMarketAPI;
 public class YandexMarketClient
 {
     private HttpClient _httpClient;
-    
+
     public Campaigns Campaigns;
     public Business Business;
     public Categories Categories;
-    
+
     /// <summary>
     /// Инициализация клиента и ресурсов
     /// </summary>
@@ -30,10 +31,21 @@ public class YandexMarketClient
         Categories = new Categories(this, "categories");
     }
 
-    public async Task<T> GetAsync<T>(string url, Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
+    private StringContent JsonToStringContent(object? jsonData)
+    {
+        var json = JsonConvert.SerializeObject(jsonData, new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        });
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        return content;
+    }
+
+    public async Task<T> GetAsync<T>(string url, Dictionary<string, string?>? queryParams = null,
+        string dateFormatString = "dd-MM-yyyy")
     {
         string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
-        
+
         using var response = await _httpClient.GetAsync(uri);
         string content = await response.Content.ReadAsStringAsync();
 
@@ -41,12 +53,11 @@ public class YandexMarketClient
         {
             throw new HttpRequestException($"Ошибка в GET запросе {uri}: {response.StatusCode}, ответ: {content}");
         }
-
-        var settings = new JsonSerializerSettings
+        
+        var result = JsonConvert.DeserializeObject<T>(content, new JsonSerializerSettings
         {
             DateFormatString = dateFormatString
-        };
-        var result = JsonConvert.DeserializeObject<T>(content, settings);
+        });
 
         if (result is null)
         {
@@ -60,20 +71,19 @@ public class YandexMarketClient
         Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
     {
         string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
-        
-        using var response = await _httpClient.PostAsJsonAsync(uri, jsonData);
+
+        using var response = await _httpClient.PostAsync(uri, JsonToStringContent(jsonData));
         string content = await response.Content.ReadAsStringAsync();
-            
+
         if (!response.IsSuccessStatusCode)
         {
             throw new HttpRequestException($"Ошибка в POST запросе {uri}: {response.StatusCode}, ответ: {content}");
         }
 
-        var settings = new JsonSerializerSettings
+        var result = JsonConvert.DeserializeObject<T>(content, new JsonSerializerSettings
         {
             DateFormatString = dateFormatString
-        };
-        var result = JsonConvert.DeserializeObject<T>(content, settings);
+        });
 
         if (result is null)
         {
@@ -88,20 +98,19 @@ public class YandexMarketClient
         Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
     {
         string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
-        
-        using var response = await _httpClient.PutAsJsonAsync(uri, jsonData);
+
+        using var response = await _httpClient.PutAsync(uri, JsonToStringContent(jsonData));
         string content = await response.Content.ReadAsStringAsync();
-            
+
         if (!response.IsSuccessStatusCode)
         {
             throw new HttpRequestException($"Ошибка в PUT запросе {uri}: {response.StatusCode}, ответ: {content}");
         }
 
-        var settings = new JsonSerializerSettings
+        var result = JsonConvert.DeserializeObject<T>(content, new JsonSerializerSettings
         {
             DateFormatString = dateFormatString
-        };
-        var result = JsonConvert.DeserializeObject<T>(content, settings);
+        });
 
         if (result is null)
         {

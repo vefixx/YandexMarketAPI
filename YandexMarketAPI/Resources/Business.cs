@@ -20,4 +20,15 @@ public class Business : ResourceBase
         BusinessSettingsResponse response = await Client.PostAsync<BusinessSettingsResponse>(url);
         return response;
     }
+    
+    public async Task<ApiDefaultResponse> OfferPricesUpdateAsync(long businessId, List<UpdateBusinessOfferPriceDTO> offers)
+    {
+        string url = BaseUrl + $"/{businessId}/offer-prices/updates";
+        Dictionary<string, object?> json = new Dictionary<string, object?>
+        {
+            ["offers"] = offers
+        };
+        ApiDefaultResponse response = await Client.PostAsync<ApiDefaultResponse>(url, jsonData: json);
+        return response;
+    }
 }
