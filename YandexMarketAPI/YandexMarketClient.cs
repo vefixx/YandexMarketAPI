@@ -3,6 +3,7 @@ using System.Text;
 using YandexMarketAPI.Resources;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace YandexMarketAPI;
 
@@ -16,6 +17,25 @@ public class YandexMarketClient
     public Campaigns Campaigns;
     public Business Business;
     public Categories Categories;
+
+    private static readonly JsonSerializerSettings RequestJsonSettings = new()
+    {
+        NullValueHandling = NullValueHandling.Ignore,
+        ContractResolver = new DefaultContractResolver
+        {
+            // Устанавливаем по умолчанию, чтобы все свойства моделей преобразовывались
+            // в camelCase (если у них нет аттрибута JsonProperty[])
+            NamingStrategy = new CamelCaseNamingStrategy(
+                processDictionaryKeys: true,
+                overrideSpecifiedNames: false
+            )
+        }
+    };
+
+    private static readonly JsonSerializerSettings ResponseJsonSettings = new()
+    {
+        DateFormatString = "dd-MM-yyyy"
+    };
 
     /// <summary>
     /// Инициализация клиента и ресурсов
@@ -31,92 +51,59 @@ public class YandexMarketClient
         Categories = new Categories(this, "categories");
     }
 
-    private StringContent JsonToStringContent(object? jsonData)
+    private static StringContent? BuildContent(object? jsonData)
     {
-        var json = JsonConvert.SerializeObject(jsonData, new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore
-        });
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-        return content;
+        if (jsonData == null)
+            return null;
+
+        string json = JsonConvert.SerializeObject(jsonData, RequestJsonSettings);
+        return new StringContent(json, Encoding.UTF8, "application/json");
     }
 
-    public async Task<T> GetAsync<T>(string url, Dictionary<string, string?>? queryParams = null,
-        string dateFormatString = "dd-MM-yyyy")
+    private static string BuildUri(string url, Dictionary<string, string?>? queryParams)
     {
-        string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
+        if (queryParams != null)
+        {
+            queryParams = queryParams.Where(kv => kv.Value != null).ToDictionary(kv => kv.Key, kv => kv.Value);
+        }
 
-        using var response = await _httpClient.GetAsync(uri);
+        return queryParams != null ? QueryHelpers.AddQueryString(url, queryParams) : url;
+    }
+
+    private async Task<T> SendAsync<T>(HttpMethod method, string url, object? jsonData = null,
+        Dictionary<string, string?>? queryParams = null)
+    {
+        string uri = BuildUri(url, queryParams);
+
+        using var request = new HttpRequestMessage(method, uri)
+        {
+            Content = BuildContent(jsonData)
+        };
+
+        using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseContentRead);
         string content = await response.Content.ReadAsStringAsync();
 
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpRequestException($"Ошибка в GET запросе {uri}: {response.StatusCode}, ответ: {content}");
+            string preview = content.Length > 500 ? content[..500] : content;
+            throw new HttpRequestException(
+                $"Ошибка {method} {uri}: {(int)response.StatusCode} {response.ReasonPhrase}. Ответ: {preview}");
         }
-        
-        var result = JsonConvert.DeserializeObject<T>(content, new JsonSerializerSettings
-        {
-            DateFormatString = dateFormatString
-        });
 
+        var result = JsonConvert.DeserializeObject<T>(content, ResponseJsonSettings);
         if (result is null)
-        {
-            throw new JsonException($"Ответ от сервера пустой ({uri}), модель преобразована некорректно.");
-        }
+            throw new JsonException($"Ответ пустой или не распознан ({uri}).");
 
         return result;
     }
+
+    public async Task<T> GetAsync<T>(string url,
+        Dictionary<string, string?>? queryParams = null) => await SendAsync<T>(HttpMethod.Get, url, null, queryParams);
 
     public async Task<T> PostAsync<T>(string url, object? jsonData = null,
-        Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
-    {
-        string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
-
-        using var response = await _httpClient.PostAsync(uri, JsonToStringContent(jsonData));
-        string content = await response.Content.ReadAsStringAsync();
-
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpRequestException($"Ошибка в POST запросе {uri}: {response.StatusCode}, ответ: {content}");
-        }
-
-        var result = JsonConvert.DeserializeObject<T>(content, new JsonSerializerSettings
-        {
-            DateFormatString = dateFormatString
-        });
-
-        if (result is null)
-        {
-            throw new JsonException($"Ответ от сервера пустой ({uri}), модель преобразована некорректно.");
-        }
-
-        return result;
-    }
-
+        Dictionary<string, string?>? queryParams = null,
+        CancellationToken ct = default) => await SendAsync<T>(HttpMethod.Post, url, jsonData, queryParams);
 
     public async Task<T> PutAsync<T>(string url, object? jsonData = null,
-        Dictionary<string, string?>? queryParams = null, string dateFormatString = "dd-MM-yyyy")
-    {
-        string uri = queryParams is not null ? QueryHelpers.AddQueryString(url, queryParams) : url;
-
-        using var response = await _httpClient.PutAsync(uri, JsonToStringContent(jsonData));
-        string content = await response.Content.ReadAsStringAsync();
-
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new HttpRequestException($"Ошибка в PUT запросе {uri}: {response.StatusCode}, ответ: {content}");
-        }
-
-        var result = JsonConvert.DeserializeObject<T>(content, new JsonSerializerSettings
-        {
-            DateFormatString = dateFormatString
-        });
-
-        if (result is null)
-        {
-            throw new JsonException($"Ответ от сервера пустой ({uri}), модель преобразована некорректно.");
-        }
-
-        return result;
-    }
+        Dictionary<string, string?>? queryParams = null) => await SendAsync<T>(HttpMethod.Put, url, jsonData, queryParams);
 }
